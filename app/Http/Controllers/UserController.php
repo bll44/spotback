@@ -18,7 +18,7 @@ class UserController extends Controller
 	public function changeUserState(Request $http)
 	{
 		$username = $http->user;
-		$active = $http->active;
+		$active = $http->active; // yes 
 		// set active user in session
 		if($active)
 		{
