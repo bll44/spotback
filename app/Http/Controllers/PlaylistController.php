@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 
 class PlaylistController extends Controller
 {
@@ -15,5 +16,10 @@ class PlaylistController extends Controller
     	$curl = curl_init();
     	// set the url
     	// curl_setopt($curl, 'CURLOPT_URL', $this->baseUrl . 'users/')
+    }
+
+    public function crontab()
+    {
+
     }
 }

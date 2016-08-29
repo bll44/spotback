@@ -16,7 +16,7 @@ Route::get('/', function () {
 	{
 		return redirect('active_user');
 	}
-	elseif( strlen(session('ActiveUser')) <= 0 || is_null(session('ActiveUser')) )
+	elseif( strlen(session('ActiveUser')) <= 0 )
 	{
 		session()->flush();
 		session()->regenerate();
@@ -32,3 +32,5 @@ Route::get('/', function () {
 
 Route::get('active_user', 'UserController@switchActiveUser');
 Route::get('change_user_state', 'UserController@changeUserState');
+
+Route::get('crontab', 'PlaylistController@crontab');

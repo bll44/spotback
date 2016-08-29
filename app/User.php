@@ -33,7 +33,7 @@ class User extends Authenticatable
     {
     	$url = env('SPOTIFY_API_BASE_URL') . 'users/' . $this->username . '/playlists';
     	$curl = new Curl();
-    	$curl->setHeader('Authorization', 'Bearer BQAK7-Dr_gQwzdm-A09ibOHbMn8iJUQS_azFXYTET5vyPOPEZvCgHNqVdPwcYamLv80ZAJo2HMHDMx_7VUPFsA');
+    	$curl->setHeader('Authorization', 'Bearer BQBtvtn9kjFkmLwAxRmYx3pN_xALyupA-x1K4aFt3D7rJst8kRfaPvGwh6NnP-kNhCF-V0A0Vem_v3KyNgcFXQ');
     	$curl->get($url);
     	return $curl->response;
     }
