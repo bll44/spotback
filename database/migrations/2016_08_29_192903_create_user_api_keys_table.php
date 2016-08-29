@@ -17,6 +17,9 @@ class CreateUserApiKeysTable extends Migration
             $table->increments('id');
             $table->string('client_id');
             $table->string('client_secret');
+            $table->string('b64_auth_code')->nullable();
+            $table->string('auth_token')->nullable();
+            $table->timestamp('auth_token_expiration')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });

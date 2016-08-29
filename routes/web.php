@@ -24,13 +24,13 @@ Route::get('/', function () {
 	}
 	else
 	{
-		// if there is an ActiveUser, retrieve the user's playlists
+		// if there is an ActiveUser, authenticate the active user
 		$UserController = new \App\Http\Controllers\UserController;
-		return $UserController->getPlaylists();
+		return $UserController->tryAuthentication();
 	}
 });
 
+Route::get('playlists', 'PlaylistController@getPlaylists');
+
 Route::get('active_user', 'UserController@switchActiveUser');
 Route::get('change_user_state', 'UserController@changeUserState');
-
-Route::get('crontab', 'PlaylistController@crontab');

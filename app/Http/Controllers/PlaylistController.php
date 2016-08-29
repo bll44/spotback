@@ -5,21 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use DB;
+use App\User;
 
 class PlaylistController extends Controller
 {
-	public $baseUrl = env('SPOTIFY_API_BASE_URL');
 
-    public function getPlaylists($user)
+    public function getPlaylists()
     {
-    	$curl = curl_init();
-    	// set the url
-    	// curl_setopt($curl, 'CURLOPT_URL', $this->baseUrl . 'users/')
-    }
-
-    public function crontab()
-    {
-
+        $user = new User;
+        $user->username = session('ActiveUser');
+        $playlists = $user->playlists()->items;
+        
+        return view('user/playlists', compact('playlists'));
     }
 }

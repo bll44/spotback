@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use \Curl\Curl;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
 	{
 		$username = $http->user;
 		$active = $http->active; // yes 
-		// set active user in session
+		// set ActiveUser in session
 		if($active)
 		{
 			session(['ActiveUser' => $username]);
@@ -32,13 +33,18 @@ class UserController extends Controller
 		return redirect('/');
 	}
 
-	public function getPlaylists()
+	public function tryAuthentication()
 	{
-		$user = new User;
-		$user->username = session('ActiveUser');
-		$playlists = $user->playlists()->items;
-		// return $playlists;
-
-		return view('user/playlists', compact('playlists'));
+		$user = User::where('username', session()->get('ActiveUser'))->first();
+		if($user->authenticate())
+		{
+			return redirect('playlists');
+		}
+		else
+		{
+			session()->flush();
+			session()->regenerate();
+			return 'Authentication failed. Please contact the system administrator.';
+		}
 	}
 }
