@@ -30,6 +30,10 @@ Route::get('/', function () {
 	}
 });
 
+Route::get('test', 'UserController@test');
+
+Route::get('playlist/view/{playlistId}', 'PlaylistController@view');
+
 Route::get('playlists', 'PlaylistController@getPlaylists');
 
 Route::get('active_user', 'UserController@switchActiveUser');

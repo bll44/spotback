@@ -70,4 +70,20 @@ class User extends Authenticatable
         // return value of number of rows affected by update query
         return $affectedRows > 0 ? true : false;
     }
+
+    public function findByUsername($username)
+    {
+        $query = "SELECT id,username FROM ";
+        $query .= "users WHERE username = ?";
+
+        $result = DB::select($query, [$username]);
+
+        if( count($result) > 1 || count($result) <= 0 )
+        {
+            return 1;
+        }
+
+        // if all validation is passed, $result[0] would be the user
+         return $result[0];
+    }
 }

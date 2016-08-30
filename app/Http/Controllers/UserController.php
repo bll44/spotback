@@ -21,6 +21,7 @@ class UserController extends Controller
 		$username = $http->user;
 		$active = $http->active; // yes 
 		// set ActiveUser in session
+		$user = User::findByUsername($username);
 		if($active)
 		{
 			session(['ActiveUser' => $username]);
@@ -46,5 +47,12 @@ class UserController extends Controller
 			session()->regenerate();
 			return 'Authentication failed. Please contact the system administrator.';
 		}
+	}
+
+	public function test()
+	{
+		$user = new User;
+		return $user->findByUsername('smerfmurph');
+
 	}
 }
