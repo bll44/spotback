@@ -13,8 +13,8 @@ class PlaylistController extends Controller
 
     public function getPlaylists()
     {
-        $user = new User;
-        $user->username = session('ActiveUser');
+        $user = session('ActiveUser');
+        // $user = User::findByUsername(session('ActiveUser')->username);
         $playlists = $user->playlists()->items;
         // return $playlists;
         

@@ -7,7 +7,7 @@
 	@yield('styles')
 	@if(session()->has('ActiveUser'))
 		<p class="pull-right">
-			{{ session('ActiveUser') }} | <a href="/change_user_state?user={{ session('ActiveUser') }}&active=0">End session</a>
+			{{ session('ActiveUser')->username }} | <a href="/change_user_state?user={{ session('ActiveUser') }}&active=0">End session</a>
 		</p>
 	@endif
 	<div class="container">

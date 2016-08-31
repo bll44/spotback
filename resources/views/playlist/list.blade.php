@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h3>{{ session('ActiveUser') }} Playlists</h3>
+<h3>{{ session('ActiveUser')->username }} Playlists</h3>
 
 <div class="row">
 	<div class="col-lg-12 col-md-12">

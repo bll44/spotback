@@ -19,12 +19,14 @@ class UserController extends Controller
 	public function changeUserState(Request $http)
 	{
 		$username = $http->user;
-		$active = $http->active; // yes 
+		$active = $http->active; // yes
+
 		// set ActiveUser in session
 		$user = User::findByUsername($username);
 		if($active)
 		{
-			session(['ActiveUser' => $username]);
+			session(['ActiveUser' => $user]);
+			// return session()->get('ActiveUser')->username;
 		}
 		else
 		{
@@ -36,16 +38,21 @@ class UserController extends Controller
 
 	public function tryAuthentication()
 	{
-		$user = User::where('username', session()->get('ActiveUser'))->first();
-		if($user->authenticate())
+		$user = User::where('username', session()->get('ActiveUser')->username)->first();
+		
+		// perform the authentication
+		try 
 		{
-			return redirect('playlists');
-		}
-		else
+			if($user->authenticate())
+			{
+				return redirect('playlists');
+			}
+		} 
+		catch (Exception $e) 
 		{
 			session()->flush();
 			session()->regenerate();
-			return 'Authentication failed. Please contact the system administrator.';
+			return 'Exception: ' . $e->getMessage() . "\n";
 		}
 	}
 

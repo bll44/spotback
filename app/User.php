@@ -51,6 +51,7 @@ class User extends Authenticatable
     {
         $url = 'https://accounts.spotify.com/api/token';
         $curl = new Curl();
+
         $curl->setHeader('Authorization', 'Basic ' . $this->keyRing->b64_auth_code);
         $curl->post($url, ['grant_type' => 'client_credentials']);
         $authToken = $curl->response->access_token;
@@ -71,19 +72,9 @@ class User extends Authenticatable
         return $affectedRows > 0 ? true : false;
     }
 
-    public function findByUsername($username)
+    public static function findByUsername($username)
     {
-        $query = "SELECT id,username FROM ";
-        $query .= "users WHERE username = ?";
-
-        $result = DB::select($query, [$username]);
-
-        if( count($result) > 1 || count($result) <= 0 )
-        {
-            return 1;
-        }
-
-        // if all validation is passed, $result[0] would be the user
-         return $result[0];
+        $user = User::where('username', $username)->first();
+        return $user;
     }
 }

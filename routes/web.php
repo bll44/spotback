@@ -16,7 +16,7 @@ Route::get('/', function () {
 	{
 		return redirect('active_user');
 	}
-	elseif( strlen(session('ActiveUser')) <= 0 )
+	elseif( strlen(session('ActiveUser')->username) <= 0 )
 	{
 		session()->flush();
 		session()->regenerate();
